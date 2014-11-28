@@ -1,4 +1,6 @@
 #!/bin/bash
+# Create an SSL signing request, copy it to a signing host, sign it and
+# download the signed certificate.
 
 FILENAME="device"
 KEY_FILE="${FILENAME}.key"
