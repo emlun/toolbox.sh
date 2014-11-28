@@ -1,5 +1,5 @@
 #!/bin/bash
-# Print the currently active netctl profile, or (none) if none is active.
+# Print the SSID of the currently active wifi connection, or (none).
 
 INTERFACE=${1:-wlan0}
 
