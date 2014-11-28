@@ -1,7 +1,7 @@
 #!/bin/bash
 # Print the currently active netctl profile, or (none) if none is active.
 
-INTERFACE=wlan0
+INTERFACE=${1:-wlan0}
 
 search() {
     wpa_cli -i "${INTERFACE}" status | grep 'ssid'
