@@ -1,3 +1,4 @@
+#!/bin/bash
 # Wraps md5sum and allows specification of the correct md5sum
 # immediately on the command line.
 
