@@ -19,7 +19,7 @@ chmod 600 "${KEY_FILE}"
 
 openssl req -newkey rsa:2048 -keyout "${KEY_FILE}" -out "${REQUEST_FILE}" -nodes
 
-scp "${REQUEST_FILE}" "mimer:${UPLOAD_FILE}"
+scp "${REQUEST_FILE}" "${CA_HOST}:${UPLOAD_FILE}"
 
 ssh -t "${CA_HOST}" sudo openssl x509 -req -in "'${UPLOAD_FILE}'" -CA "'${CA_HOST_CACERT_FILE}'" -CAkey "'${CA_HOST_CA_KEY_FILE}'" -out "'${DOWNLOAD_FILE}'" -days 365
 
