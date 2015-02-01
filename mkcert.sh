@@ -10,7 +10,7 @@ CERT_FILE="${FILENAME}.crt"
 UPLOAD_FILE="tmp/${REQUEST_FILE}"
 DOWNLOAD_FILE="tmp/${CERT_FILE}"
 
-CA_HOST=home
+CA_HOST=mimer
 CA_HOST_CACERT_FILE="/etc/ssl/public/mimer-root-CA.crt"
 CA_HOST_CA_KEY_FILE="/etc/ssl/private/mimer-root-CA.key"
 
