@@ -7,6 +7,9 @@ KEY_FILE="${FILENAME}.key"
 REQUEST_FILE="${FILENAME}.csr"
 CERT_FILE="${FILENAME}.crt"
 
+ORG_UNIT="$1"
+FQDN="$(hostname)"
+
 UPLOAD_FILE="tmp/${REQUEST_FILE}"
 DOWNLOAD_FILE="tmp/${CERT_FILE}"
 
@@ -22,7 +25,20 @@ chmod 600 "${KEY_FILE}"
 openssl req -newkey rsa:2048 \
   -keyout "${KEY_FILE}" \
   -out "${REQUEST_FILE}" \
-  -nodes
+  -nodes << EOF
+SE
+Stockholms Län
+Stockholm
+Emil Lundberg
+${ORG_UNIT}
+${FQDN}
+
+
+
+EOF
+
+echo ""
+echo "Certificate request created"
 
 scp "${REQUEST_FILE}" "${CA_HOST}:${UPLOAD_FILE}"
 
