@@ -1,6 +1,21 @@
 #!/bin/bash
 # Utility script for making it easier to sign stuff for Keybase.io with an
 # airgapped offline key.
+#
+# Usage:
+# 1. Set the `REMOVABLE_DEVICE_UUID` below (see `$ lsblk -o +FSTYPE,UUID`)
+# 2. Go to keybase.io and add a new key or proof, track someone etc.
+# 3. Choose to sign manually
+# 4. Copy the script to the Xorg primary clipboard (should be enough to just
+#    select it all - triple-clicking the text box does the trick in Firefox)
+# 5. Run this script
+# 6. Move the removable device to the airgapped machine and mount it
+# 7. Sign the payload (`keybase.json`). You can use the `keybase-sign.sh`
+#    script written to the removable device for this, note that it assumes the
+# drive is mounted at the same mount point on both machines.
+# 8. Unmount and move the removable device back to your internet-connected
+#    machine. This script (which should still be running) should take care of
+#    the rest.
 
 REMOVABLE_DEVICE_UUID="c5cd54f0-dd6e-4928-be23-dab8a874109b"
 MOUNTPOINT=/mnt/usb
