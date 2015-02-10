@@ -14,7 +14,7 @@ UPLOAD_SCRIPT="${BASEDIR}/keybase-finish.sh"
 
 sudo mount -U ${REMOVABLE_DEVICE_UUID} "${MOUNTPOINT}"
 sudo mkdir -p "${BASEDIR}"
-sudo chown -R $(whoami):$(whoami) "${BASEDIR}"
+sudo chown -R $(whoami) "${BASEDIR}"
 
 # Read text blob from keybase script window
 xclip -o > "${KEYBASE_BLOB_FILE}"
