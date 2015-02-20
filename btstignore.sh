@@ -11,6 +11,6 @@ EOF
 
 # Add ignore patterns for Bittorrent Sync files to Syncthing ignore file
 cat << EOF >> .stignore
-# BitTorrent Sync
+// BitTorrent Sync
 .sync
 EOF
