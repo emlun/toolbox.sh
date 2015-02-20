@@ -13,4 +13,7 @@ EOF
 cat << EOF >> .stignore
 // BitTorrent Sync
 .sync
+.SyncArchive
+.SyncIgnore
+SyncArchive
 EOF
