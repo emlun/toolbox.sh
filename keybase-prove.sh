@@ -38,7 +38,7 @@ xclip -o > "${KEYBASE_BLOB_FILE}"
 cat << EOF > "${MAKE_PAYLOAD_SCRIPT}"
 #!/bin/bash
 EOF
-grep -E "^echo" "${KEYBASE_BLOB_FILE}" | cut -d '|' -f 1 >> "${MAKE_PAYLOAD_SCRIPT}"
+grep -E "^\s*echo" "${KEYBASE_BLOB_FILE}" | cut -d '|' -f 1 >> "${MAKE_PAYLOAD_SCRIPT}"
 chmod a+x "${MAKE_PAYLOAD_SCRIPT}"
 "${MAKE_PAYLOAD_SCRIPT}" > "${PAYLOAD_FILE}"
 
@@ -48,7 +48,7 @@ cat << EOF > "${SIGN_SCRIPT}"
 EOF
 # Force usage of main key (prevent gpg from using a subkey instead)
 # Also provide the input as a file instead of as stdin
-grep -E "^gpg" "${KEYBASE_BLOB_FILE}" | cut -d '|' -f 1 | \
+grep -E "^\s*gpg" "${KEYBASE_BLOB_FILE}" | cut -d '|' -f 1 | \
   sed "s/-u '\([0-9a-fA-F]*\)'/-u '\1!'/" | \
   sed "s#sign#sign '${PAYLOAD_FILE}'#" \
   >> "${SIGN_SCRIPT}"
@@ -59,7 +59,7 @@ cat << EOF > "${UPLOAD_SCRIPT}"
 #!/bin/bash
 cat "${SIGNED_FILE}" | \\
 EOF
-grep -A 1000 -E "^perl" "${KEYBASE_BLOB_FILE}" >> "${UPLOAD_SCRIPT}"
+grep -A 1000 -E "^\s*perl" "${KEYBASE_BLOB_FILE}" >> "${UPLOAD_SCRIPT}"
 chmod a+x "${UPLOAD_SCRIPT}"
 
 sudo umount "${MOUNTPOINT}"
