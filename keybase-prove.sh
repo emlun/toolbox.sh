@@ -48,18 +48,18 @@ cat << EOF > "${SIGN_SCRIPT}"
 EOF
 # Force usage of main key (prevent gpg from using a subkey instead)
 # Also provide the input as a file instead of as stdin
-grep -E "^\s*gpg" "${KEYBASE_BLOB_FILE}" | cut -d '|' -f 1 | \
+grep -E "^\s*gpg" "${KEYBASE_BLOB_FILE}" | cut -d '`' -f 1 | \
   sed "s/-u '\([0-9a-fA-F]*\)'/-u '\1!'/" | \
   sed "s#sign#sign '${PAYLOAD_FILE}'#" \
   >> "${SIGN_SCRIPT}"
 chmod a+x "${SIGN_SCRIPT}"
 
 ### Make script for uploading signature ##
-cat << EOF > "${UPLOAD_SCRIPT}"
-#!/bin/bash
-cat "${SIGNED_FILE}" | \\
-EOF
-grep -A 1000 -E "^\s*perl" "${KEYBASE_BLOB_FILE}" >> "${UPLOAD_SCRIPT}"
+cat "${KEYBASE_BLOB_FILE}" | \
+  grep -vE "^\s*echo" | \
+  grep -vE "^\s*gpg" | \
+  sed "s#--data-urlencode sig=.*#--data-urlencode sig@${SIGNED_FILE} \\\\#" \
+  > "${UPLOAD_SCRIPT}"
 chmod a+x "${UPLOAD_SCRIPT}"
 
 sudo umount "${MOUNTPOINT}"
